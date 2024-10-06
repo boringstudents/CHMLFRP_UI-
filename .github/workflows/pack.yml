@@ -1,4 +1,4 @@
-name: Nuitka-pack
+name: pack
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  build:
+  pack:
     # Windows is currently the only platform this action supports
     runs-on: windows-latest
 
@@ -25,23 +25,17 @@ jobs:
           python-version: '3.12.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
           cache: 'pip'
+          
       - run: pip install -r requirements.txt
+      
+      - run: pip install pyinstaller
 
-      # Build python script into exe
-      - uses: Nuitka/Nuitka-Action@main
-        with:
-          nuitka-version: main
-          script-name: start.py
-          follow-imports: true
-          standalone: true
-          onefile: false
-          include-data-dir: res=res
-          enable-plugins: tk-inter
+      # pack python script into exe
+      - run: pyinstaller -w -D CHMLFRP_UI.py -i favicon.ico --noupx --uac-admin --debug=all
 
       # Uploads artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: XCL II-Alpha
-          path: build/start.dist/
+          path: dist/
           compression-level: 0
