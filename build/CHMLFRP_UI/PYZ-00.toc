@@ -1,2 +1,0 @@
-('C:\\Users\\Administrator\\Desktop\\code\\pythonProject\\CHMLFRP_UI\\build\\CHMLFRP_UI\\PYZ-00.pyz',
- [])
