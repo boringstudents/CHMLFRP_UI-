@@ -31,11 +31,11 @@ jobs:
       - run: pip install pyinstaller
 
       # pack python script into exe
-      - run: pyinstaller -w -D CHMLFRP_UI.py -i favicon.ico --noupx --uac-admin --debug=all
+      - run: pyinstaller -w -F CHMLFRP_UI.py -i favicon.ico --noupx --uac-admin --debug=all
 
       # Uploads artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          path: dist/
+          path: input/
           compression-level: 0
