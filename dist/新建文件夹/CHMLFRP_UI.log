@@ -1,0 +1,10 @@
+2024-10-06 11:47:16,853 - CHMLFRP_UI - INFO - 正在下载所需文件...
+2024-10-06 11:47:34,622 - CHMLFRP_UI - INFO - 成功移动文件: frpc.exe
+2024-10-06 11:47:34,623 - CHMLFRP_UI - INFO - 成功移动文件: frps_full.ini
+2024-10-06 11:47:34,623 - CHMLFRP_UI - INFO - 已删除解压文件夹: ChmlFrp-0.51.2_240715_windows_amd64
+2024-10-06 11:47:34,625 - CHMLFRP_UI - INFO - 文件下载、提取和清理完成
+2024-10-06 11:47:59,028 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-06 11:47:59,337 - CHMLFRP_UI - INFO - 登录成功
+2024-10-06 11:47:59,337 - CHMLFRP_UI - INFO - 登录成功
+2024-10-06 11:47:59,338 - CHMLFRP_UI - INFO - 凭证保存成功
+2024-10-06 11:48:14,788 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程

@@ -1,0 +1,19 @@
+[
+  {
+    "token": "5WvFqN3OSiE6gLfwyiwMPW0a",
+    "nodes": [
+      "\u65e5\u672c\u4e1c\u4eac\u76f4\u8fde-2",
+      "\u6e56\u5317\u5341\u5830\u7535\u4fe1",
+      "\u82f1\u56fd\u4f26\u6566",
+      "\u5c71\u4e1c\u67a3\u5e84\u591a\u7ebf",
+      "\u6e56\u5357\u5a04\u5e95",
+      "\u6cb3\u5317\u79e6\u7687\u5c9b\u8054\u901a",
+      "\u56db\u5ddd\u6210\u90fd",
+      "\u4e2d\u56fd\u9999\u6e2fCN2-3"
+    ],
+    "tunnel_name": "alist123",
+    "domain": "frp.wtf",
+    "subdomain": "MC",
+    "record_type": "A"
+  }
+]

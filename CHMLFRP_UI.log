@@ -1,0 +1,27 @@
+2024-10-06 11:41:30,326 - CHMLFRP_UI - INFO - 正在下载所需文件...
+2024-10-06 11:41:48,296 - CHMLFRP_UI - INFO - 成功移动文件: frpc.exe
+2024-10-06 11:41:48,298 - CHMLFRP_UI - INFO - 成功移动文件: frps_full.ini
+2024-10-06 11:41:48,299 - CHMLFRP_UI - INFO - 已删除解压文件夹: ChmlFrp-0.51.2_240715_windows_amd64
+2024-10-06 11:41:48,301 - CHMLFRP_UI - INFO - 文件下载、提取和清理完成
+2024-10-06 11:42:05,475 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-06 11:42:05,700 - CHMLFRP_UI - INFO - 登录成功
+2024-10-06 11:42:05,701 - CHMLFRP_UI - INFO - 登录成功
+2024-10-06 11:42:05,702 - CHMLFRP_UI - INFO - 凭证保存成功
+2024-10-06 11:42:34,388 - CHMLFRP_UI - INFO - 开始获取节点数据
+2024-10-06 11:42:37,032 - CHMLFRP_UI - INFO - 解析域名: MC.frp.wtf
+2024-10-06 11:42:37,033 - CHMLFRP_UI - DEBUG - 解析结果 - 子域名: MC, 主域名: frp.wtf
+2024-10-06 11:42:37,034 - CHMLFRP_UI - INFO - 配置已添加
+2024-10-06 11:42:42,101 - CHMLFRP_UI - INFO - 当前使用节点: 日本东京直连-2
+2024-10-06 11:42:42,101 - CHMLFRP_UI - INFO - 获取节点 日本东京直连-2 的IP
+2024-10-06 11:42:42,269 - CHMLFRP_UI - INFO - 节点 日本东京直连-2 的IP为 103.76.128.110
+2024-10-06 11:42:42,269 - CHMLFRP_UI - INFO - 更新子域名 MC.frp.wtf 到 103.76.128.110
+2024-10-06 11:42:44,912 - CHMLFRP_UI - INFO - 子域名更新成功
+2024-10-06 11:42:44,912 - CHMLFRP_UI - INFO - 已更新子域名 MC.frp.wtf 到 103.76.128.110
+2024-10-06 11:42:45,067 - CHMLFRP_UI - INFO - 获取隧道 alist123 的信息
+2024-10-06 11:42:45,067 - CHMLFRP_UI - DEBUG - 找到隧道 alist123 的信息
+2024-10-06 11:42:45,067 - CHMLFRP_UI - INFO - 更新隧道 alist123 到节点 日本东京直连-2
+2024-10-06 11:42:45,291 - CHMLFRP_UI - INFO - 隧道更新成功
+2024-10-06 11:42:45,291 - CHMLFRP_UI - INFO - 已更新隧道 alist123 到节点 日本东京直连-2
+2024-10-06 11:42:50,905 - CHMLFRP_UI - INFO - frpc已启动，使用节点: 日本东京直连-2
+2024-10-06 11:43:07,875 - CHMLFRP_UI - INFO - 隧道 'alist123' 已停止
+2024-10-06 11:43:59,130 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程

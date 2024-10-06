@@ -1,0 +1,18 @@
+CHMLFRP_UI 由borring_student基于v2api编写
+部分源码在https://blog.csdn.net/2403_86951163/article/details/142668597开源
+2024/10/1
+增加了隧道多选
+优化了ddns的api
+动态隧道的多启动
+
+2024/10/3
+修好了无法启动和关闭隧道的bug
+加入了ip工具和api ping
+重写了主函数的结果
+加入了部分数据加密
+
+CHMLFRP_UI_2024_10_6
+重写了主窗口函数
+去除了不必要的api请求
+加入了更多的功能
+使用异步多线程完成了性能优化
