@@ -20,7 +20,6 @@ from mcstatus import *
 from requests import *
 import psutil
 import pyperclip
-import traceback
 import ipaddress
 import re
 
