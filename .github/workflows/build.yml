@@ -1,3 +1,5 @@
+name: Build Compressed PyQt6 Single-File GUI with Nuitka
+
 on:
   push:
     branches: [ main ]
@@ -32,9 +34,18 @@ jobs:
         pip install nuitka
         pip install -r requirements.txt
 
-    - name: Build with Nuitka
+    - name: Build with Nuitka (with compression)
       run: |
-        python -m nuitka --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --include-package-data=PyQt6 --include-package-data=PyQt6-WebEngine --output-dir=dist CHMLFRP_UI.py
+        python -m nuitka --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --include-package-data=PyQt6 --include-package-data=PyQt6-WebEngine --include-qt-plugins=all --plugin-enable=pyqt6 --output-dir=dist --compress-level=2 CHMLFRP_UI.py
+
+    - name: Install UPX
+      run: |
+        choco install upx
+        upx --version
+
+    - name: Compress with UPX
+      run: |
+        upx --best --lzma dist/CHMLFRP_UI.exe
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
