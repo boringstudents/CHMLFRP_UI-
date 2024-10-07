@@ -1,20 +1,16 @@
-name: Build Compressed PyQt6 Single-File GUI with Nuitka
+name: Build Optimized PyQt6 Single-File GUI with Nuitka
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
     inputs:
       version:
         description: 'Version number'
         required: true
-        default: '2.1.0'
+        default: '1.0.0'
       author:
         description: 'Author name'
         required: true
-        default: 'boring_student'
+        default: 'Your Name'
 
 jobs:
   build:
@@ -34,9 +30,9 @@ jobs:
         pip install nuitka
         pip install -r requirements.txt
 
-    - name: Build with Nuitka (with compression)
+    - name: Build with Nuitka (optimized)
       run: |
-        python -m nuitka --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --include-package-data=PyQt6 --include-package-data=PyQt6-WebEngine --include-qt-plugins=all --plugin-enable=pyqt6 --output-dir=dist --compress-level=2 CHMLFRP_UI.py
+        python -m nuitka --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --include-package-data=PyQt6 --include-package-data=PyQt6-WebEngine --include-qt-plugins=styles,platforms --plugin-enable=pyqt6 --output-dir=dist --compress-level=3 --remove-output --assume-yes-for-downloads --nofollow-imports --follow-import-to=PyQt6,PyQt6.QtCore,PyQt6.QtGui,PyQt6.QtWidgets,PyQt6.QtWebEngineWidgets CHMLFRP_UI.py
 
     - name: Install UPX
       run: |
