@@ -25,3 +25,17 @@
 2024-10-06 11:42:50,905 - CHMLFRP_UI - INFO - frpc已启动，使用节点: 日本东京直连-2
 2024-10-06 11:43:07,875 - CHMLFRP_UI - INFO - 隧道 'alist123' 已停止
 2024-10-06 11:43:59,130 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 11:32:26,742 - CHMLFRP_UI - INFO - 正在下载所需文件...
+2024-10-07 11:32:44,363 - CHMLFRP_UI - INFO - 成功移动文件: frpc.exe
+2024-10-07 11:32:44,366 - CHMLFRP_UI - INFO - 成功移动文件: frps_full.ini
+2024-10-07 11:32:44,367 - CHMLFRP_UI - INFO - 已删除解压文件夹: ChmlFrp-0.51.2_240715_windows_amd64
+2024-10-07 11:32:44,369 - CHMLFRP_UI - INFO - 文件下载、提取和清理完成
+2024-10-07 11:33:44,470 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:34:44,475 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:35:44,466 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:36:44,465 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:37:44,466 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:38:44,474 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:39:44,478 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:40:44,472 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
+2024-10-07 11:40:58,154 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
