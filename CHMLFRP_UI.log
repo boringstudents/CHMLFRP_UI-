@@ -84,3 +84,13 @@
 2024-10-07 13:56:22,513 - CHMLFRP_UI - INFO - 登录成功
 2024-10-07 13:56:22,513 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
 2024-10-07 13:56:55,708 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 17:17:28,189 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 17:17:28,414 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 17:17:28,735 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 17:17:28,735 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 17:18:22,443 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 17:21:43,873 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 17:21:44,020 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 17:21:44,458 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 17:21:44,458 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 17:22:36,077 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
