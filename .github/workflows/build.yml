@@ -1,5 +1,3 @@
-name: Build GUI with Nuitka
-
 on:
   push:
     branches: [ main ]
@@ -36,7 +34,7 @@ jobs:
 
     - name: Build with Nuitka
       run: |
-        python -m nuitka --standalone --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --output-dir=dist CHMLFRP_UI.py
+        python -m nuitka --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --include-package-data=PyQt6 --include-package-data=PyQt6-WebEngine --output-dir=dist CHMLFRP_UI.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
