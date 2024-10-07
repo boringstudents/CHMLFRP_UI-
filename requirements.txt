@@ -1,6 +1,6 @@
 requests==2.32.3
-PyQt6==6.6.1
-
+PyQt6==6.7.1
+PyQt6-WebEngine==6.7.0
 mcstatus==11.1.1
 psutil==6.0.0
 pyperclip==1.9.0
