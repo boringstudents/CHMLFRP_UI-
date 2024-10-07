@@ -11,6 +11,7 @@ import random
 import requests
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
+from PyQt6.QtWebEngineWidgets import *
 from PyQt6.QtGui import *
 import socket
 import threading
@@ -821,7 +822,23 @@ class PingThread(QThread):
 
     def icmp_ping(self):
         try:
-            output = subprocess.check_output(["ping", "-n", "4", self.target], universal_newlines=True)
+            if sys.platform == "win32":
+                startupinfo = subprocess.STARTUPINFO()
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+                startupinfo.wShowWindow = subprocess.SW_HIDE
+                output = subprocess.check_output(
+                    ["ping", "-n", "4", self.target],
+                    universal_newlines=True,
+                    stderr=subprocess.STDOUT,
+                    startupinfo=startupinfo,
+                    creationflags=subprocess.CREATE_NO_WINDOW
+                )
+            else:
+                output = subprocess.check_output(
+                    ["ping", "-c", "4", self.target],
+                    universal_newlines=True,
+                    stderr=subprocess.STDOUT
+                )
 
             # 提取延迟时间，包括 <1ms 的情况
             times = re.findall(r"时间[=<](\d+|<1)ms", output)
@@ -843,8 +860,20 @@ class PingThread(QThread):
                 }
             else:
                 return "Ping 成功，但无法提取延迟信息"
-        except subprocess.CalledProcessError:
-            return "Ping 失败"
+        except subprocess.CalledProcessError as e:
+            # 捕获并返回错误输出
+            error_output = e.output.strip()
+            if "无法访问目标主机" in error_output:
+                return "无法访问目标主机"
+            elif "请求超时" in error_output:
+                return "请求超时"
+            elif "一般故障" in error_output:
+                return "一般故障"
+            else:
+                return f"Ping 失败: {error_output}"
+        except Exception as e:
+            return f"Ping 错误: {str(e)}"
+
 
     def calculate_packet_loss(self, output):
         match = re.search(r"(\d+)% 丢失", output)
@@ -864,17 +893,61 @@ class PingThread(QThread):
             return int(match.group(1))
         return None
 
+    import socket
+    import time
+
     def tcp_ping(self):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        start_time = time.time()
-        try:
-            sock.connect((self.target, 80))
-            return (time.time() - start_time) * 1000
-        except socket.error:
-            return None
-        finally:
-            sock.close()
+        port = 80  # 默认使用 80 端口
+        if ':' in self.target:
+            host, port = self.target.split(':')
+            port = int(port)
+        else:
+            host = self.target
+
+        results = []
+        total_time = 0
+        success = 0
+        attempts = 4  # 进行 4 次尝试，与 ICMP ping 保持一致
+
+        for _ in range(attempts):
+            try:
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.settimeout(1)  # 设置 1 秒超时
+                start_time = time.time()
+                result = sock.connect_ex((host, port))
+                end_time = time.time()
+
+                if result == 0:
+                    latency = (end_time - start_time) * 1000  # 转换为毫秒
+                    results.append(latency)
+                    total_time += latency
+                    success += 1
+                    self.update_signal.emit(self.target, f"连接成功: {latency:.2f}ms")
+                else:
+                    self.update_signal.emit(self.target, f"连接失败: {socket.error(result)}")
+            except socket.gaierror:
+                self.update_signal.emit(self.target, "名称解析失败")
+                return "名称解析失败"
+            except socket.timeout:
+                self.update_signal.emit(self.target, "连接超时")
+            except Exception as e:
+                self.update_signal.emit(self.target, f"错误: {str(e)}")
+            finally:
+                sock.close()
+
+            time.sleep(1)  # 在每次尝试之间等待 1 秒
+
+        if success > 0:
+            avg_latency = total_time / success
+            loss_rate = (attempts - success) / attempts * 100
+            return {
+                'min': min(results) if results else None,
+                'max': max(results) if results else None,
+                'avg': avg_latency,
+                'loss': loss_rate
+            }
+        else:
+            return "所有 TCP 连接尝试均失败"
 
 
     def http_ping(self):
@@ -1754,12 +1827,6 @@ class MainWindow(QMainWindow):
         self.cleanup()  # 确保您有一个cleanup方法来处理必要的清理工作
         QApplication.quit()
 
-    def closeEvent(self, event):
-        event.ignore()
-        self.hide()
-        self.tray_icon.showMessage("ChmlFrp UI程序", "程序已最小化到系统托盘", QSystemTrayIcon.MessageIcon.Information,
-                                   2000)
-
     def set_taskbar_icon(self):
         icon_path = get_absolute_path("favicon.ico")
         self.setWindowIcon(QIcon(icon_path))
@@ -1790,6 +1857,9 @@ class MainWindow(QMainWindow):
                     QMessageBox.warning(self, "节点离线", f"节点 {node_name} 离线，隧道 {tunnel_name} 已停止")
             else:
                 self.logger.warning(f"未找到隧道 {tunnel_name} 的信息")
+
+        # 更新节点列表
+        self.load_nodes()
 
     def update_button_styles(self, selected_button):
         for button in self.tab_buttons:
@@ -2483,9 +2553,47 @@ class MainWindow(QMainWindow):
     def show_node_details(self):
         if hasattr(self, 'selected_node'):
             details = self.format_node_details(self.selected_node)
-            QMessageBox.information(self, "节点详细信息", details)
-        else:
-            QMessageBox.warning(self, "警告", "请先选择一个节点")
+            dialog = QDialog(self)
+            dialog.setWindowTitle("节点详细信息")
+            layout = QVBoxLayout(dialog)
+
+            details_text = QTextEdit()
+            details_text.setPlainText(details)
+            details_text.setReadOnly(True)
+            layout.addWidget(details_text)
+
+            button_layout = QHBoxLayout()
+            web_view_button = QPushButton("使用web查看")
+            web_view_button.clicked.connect(lambda: self.show_web_info(self.selected_node['node_name'], dialog))
+            ok_button = QPushButton("确定")
+            ok_button.clicked.connect(dialog.accept)
+
+            button_layout.addWidget(web_view_button)
+            button_layout.addWidget(ok_button)
+            layout.addLayout(button_layout)
+
+            dialog.setLayout(layout)
+            dialog.exec()
+
+    def show_web_info(self, node_name, dialog):
+        url = f"https://preview.panel.chmlfrp.cn/node/info?node={node_name}"
+        web_view = WebView(url, self.dark_theme, self)
+        web_view.show()
+
+        # 将新创建的 WebView 添加到一个列表中，以便于管理
+        if not hasattr(self, 'web_views'):
+            self.web_views = []
+        self.web_views.append(web_view)
+
+        # 连接窗口的 destroyed 信号，以便在窗口关闭时从列表中移除
+        web_view.destroyed.connect(lambda: self.remove_web_view(web_view))
+
+        # 关闭原始对话框
+        dialog.close()
+
+    def remove_web_view(self, web_view):
+        if hasattr(self, 'web_views'):
+            self.web_views = [view for view in self.web_views if view != web_view]
 
     def format_node_details(self, node_info):
         details = f"""
@@ -3577,6 +3685,9 @@ class MainWindow(QMainWindow):
             self.dragging = False
 
     def closeEvent(self, event):
+        if hasattr(self, 'web_views'):
+            for web_view in self.web_views:
+                web_view.close()
         # 停止所有运行中的隧道
         with QMutexLocker(self.running_tunnels_mutex):
             tunnels_to_stop = list(self.running_tunnels.keys())
@@ -3658,6 +3769,9 @@ class MainWindow(QMainWindow):
 
         # 更新IP工具按钮样式
         self.update_button_styles(self.ip_tools_button)
+
+        # 更新WebView主题
+        self.update_web_view_theme()
 
     def apply_theme(self):
         if self.dark_theme:
@@ -4321,6 +4435,139 @@ class MainWindow(QMainWindow):
             if not self.running_tunnels:
                 self.dt_stop_button.setEnabled(False)
 
+    def update_web_view_theme(self):
+        if hasattr(self, 'web_views'):
+            for web_view in self.web_views:
+                web_view.apply_theme(self.dark_theme)
+
+class WebView(QMainWindow):
+    def __init__(self, url, dark_theme, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("节点详细信息")
+        self.setGeometry(100, 100, 800, 600)
+        self.setWindowFlags(Qt.WindowType.Window | Qt.WindowType.FramelessWindowHint)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+
+        # 设置窗口图标
+        icon_path = get_absolute_path("favicon.ico")
+        self.setWindowIcon(QIcon(icon_path))
+
+        self.central_widget = QWidget()
+        self.setCentralWidget(self.central_widget)
+        self.layout = QVBoxLayout(self.central_widget)
+        self.layout.setContentsMargins(10, 10, 10, 10)
+        self.layout.setSpacing(0)
+
+        self.content_widget = QWidget()
+        self.content_layout = QVBoxLayout(self.content_widget)
+        self.content_layout.setContentsMargins(0, 0, 0, 0)
+        self.content_layout.setSpacing(0)
+
+        self.title_bar = QWidget()
+        self.title_bar.setFixedHeight(40)
+        self.title_bar_layout = QHBoxLayout(self.title_bar)
+        self.title_bar_layout.setContentsMargins(15, 0, 15, 0)
+        self.title_label = QLabel("节点详细信息")
+        self.title_bar_layout.addWidget(self.title_label)
+        self.title_bar_layout.addStretch(1)
+        self.min_button = QPushButton("－")
+        self.min_button.setFixedSize(30, 30)
+        self.min_button.clicked.connect(self.showMinimized)
+        self.close_button = QPushButton("×")
+        self.close_button.setFixedSize(30, 30)
+        self.close_button.clicked.connect(self.close)
+        self.title_bar_layout.addWidget(self.min_button)
+        self.title_bar_layout.addWidget(self.close_button)
+        self.content_layout.addWidget(self.title_bar)
+
+        self.web_view = QWebEngineView()
+        self.web_view.setUrl(QUrl(url))
+        self.content_layout.addWidget(self.web_view)
+
+        self.layout.addWidget(self.content_widget)
+
+        self.apply_theme(dark_theme)
+
+        self.dragging = False
+        self.offset = QPoint()
+
+    def apply_theme(self, is_dark):
+        if is_dark:
+            style = """
+                QMainWindow {
+                    background-color: transparent;
+                }
+                QWidget#content_widget {
+                    background-color: #2D2D2D;
+                    border-radius: 20px;
+                }
+                QWidget#title_bar {
+                    background-color: #333333;
+                    border-top-left-radius: 20px;
+                    border-top-right-radius: 20px;
+                }
+                QLabel {
+                    color: #FFFFFF;
+                }
+                QPushButton {
+                    background-color: #0D47A1;
+                    color: white;
+                    border: none;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+                QPushButton:hover {
+                    background-color: #1565C0;
+                }
+            """
+        else:
+            style = """
+                QMainWindow {
+                    background-color: transparent;
+                }
+                QWidget#content_widget {
+                    background-color: #FFFFFF;
+                    border-radius: 20px;
+                }
+                QWidget#title_bar {
+                    background-color: #E0E0E0;
+                    border-top-left-radius: 20px;
+                    border-top-right-radius: 20px;
+                }
+                QLabel {
+                    color: #333333;
+                }
+                QPushButton {
+                    background-color: #4CAF50;
+                    color: white;
+                    border: none;
+                    border-radius: 15px;
+                    padding: 0px;
+                }
+                QPushButton:hover {
+                    background-color: #45a049;
+                }
+            """
+        self.setStyleSheet(style)
+        self.content_widget.setObjectName("content_widget")
+        self.title_bar.setObjectName("title_bar")
+
+    def mousePressEvent(self, event: QMouseEvent):
+        if event.button() == Qt.MouseButton.LeftButton and self.title_bar.geometry().contains(event.position().toPoint()):
+            self.dragging = True
+            self.offset = event.position().toPoint()
+
+    def mouseMoveEvent(self, event: QMouseEvent):
+        if self.dragging:
+            self.move(self.mapToGlobal(event.position().toPoint() - self.offset))
+
+    def mouseReleaseEvent(self, event: QMouseEvent):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.dragging = False
+
+    def closeEvent(self, event):
+        self.web_view.setUrl(QUrl("about:blank"))  # 清空页面内容
+        event.accept()
 
 class NodeCard(QFrame):
     clicked = pyqtSignal(object)
@@ -4347,7 +4594,7 @@ class NodeCard(QFrame):
         layout.addWidget(bandwidth_label)
 
         self.setLayout(layout)
-        self.setFixedSize(250, 150)
+        self.setFixedSize(250, 150)  # 调整大小
 
     def updateStyle(self):
         self.setStyleSheet("""

@@ -1,41 +1,86 @@
-2024-10-06 11:41:30,326 - CHMLFRP_UI - INFO - 正在下载所需文件...
-2024-10-06 11:41:48,296 - CHMLFRP_UI - INFO - 成功移动文件: frpc.exe
-2024-10-06 11:41:48,298 - CHMLFRP_UI - INFO - 成功移动文件: frps_full.ini
-2024-10-06 11:41:48,299 - CHMLFRP_UI - INFO - 已删除解压文件夹: ChmlFrp-0.51.2_240715_windows_amd64
-2024-10-06 11:41:48,301 - CHMLFRP_UI - INFO - 文件下载、提取和清理完成
-2024-10-06 11:42:05,475 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
-2024-10-06 11:42:05,700 - CHMLFRP_UI - INFO - 登录成功
-2024-10-06 11:42:05,701 - CHMLFRP_UI - INFO - 登录成功
-2024-10-06 11:42:05,702 - CHMLFRP_UI - INFO - 凭证保存成功
-2024-10-06 11:42:34,388 - CHMLFRP_UI - INFO - 开始获取节点数据
-2024-10-06 11:42:37,032 - CHMLFRP_UI - INFO - 解析域名: MC.frp.wtf
-2024-10-06 11:42:37,033 - CHMLFRP_UI - DEBUG - 解析结果 - 子域名: MC, 主域名: frp.wtf
-2024-10-06 11:42:37,034 - CHMLFRP_UI - INFO - 配置已添加
-2024-10-06 11:42:42,101 - CHMLFRP_UI - INFO - 当前使用节点: 日本东京直连-2
-2024-10-06 11:42:42,101 - CHMLFRP_UI - INFO - 获取节点 日本东京直连-2 的IP
-2024-10-06 11:42:42,269 - CHMLFRP_UI - INFO - 节点 日本东京直连-2 的IP为 103.76.128.110
-2024-10-06 11:42:42,269 - CHMLFRP_UI - INFO - 更新子域名 MC.frp.wtf 到 103.76.128.110
-2024-10-06 11:42:44,912 - CHMLFRP_UI - INFO - 子域名更新成功
-2024-10-06 11:42:44,912 - CHMLFRP_UI - INFO - 已更新子域名 MC.frp.wtf 到 103.76.128.110
-2024-10-06 11:42:45,067 - CHMLFRP_UI - INFO - 获取隧道 alist123 的信息
-2024-10-06 11:42:45,067 - CHMLFRP_UI - DEBUG - 找到隧道 alist123 的信息
-2024-10-06 11:42:45,067 - CHMLFRP_UI - INFO - 更新隧道 alist123 到节点 日本东京直连-2
-2024-10-06 11:42:45,291 - CHMLFRP_UI - INFO - 隧道更新成功
-2024-10-06 11:42:45,291 - CHMLFRP_UI - INFO - 已更新隧道 alist123 到节点 日本东京直连-2
-2024-10-06 11:42:50,905 - CHMLFRP_UI - INFO - frpc已启动，使用节点: 日本东京直连-2
-2024-10-06 11:43:07,875 - CHMLFRP_UI - INFO - 隧道 'alist123' 已停止
-2024-10-06 11:43:59,130 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
-2024-10-07 11:32:26,742 - CHMLFRP_UI - INFO - 正在下载所需文件...
-2024-10-07 11:32:44,363 - CHMLFRP_UI - INFO - 成功移动文件: frpc.exe
-2024-10-07 11:32:44,366 - CHMLFRP_UI - INFO - 成功移动文件: frps_full.ini
-2024-10-07 11:32:44,367 - CHMLFRP_UI - INFO - 已删除解压文件夹: ChmlFrp-0.51.2_240715_windows_amd64
-2024-10-07 11:32:44,369 - CHMLFRP_UI - INFO - 文件下载、提取和清理完成
-2024-10-07 11:33:44,470 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:34:44,475 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:35:44,466 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:36:44,465 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:37:44,466 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:38:44,474 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:39:44,478 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:40:44,472 - CHMLFRP_UI - WARNING - 未登录，无法检查节点状态
-2024-10-07 11:40:58,154 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 12:48:55,068 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 12:49:07,633 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 12:51:30,365 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 12:51:54,626 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 12:51:55,048 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 12:51:55,049 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 12:51:55,051 - CHMLFRP_UI - INFO - 凭证保存成功
+2024-10-07 12:59:36,559 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 12:59:36,710 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 12:59:37,050 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 12:59:37,051 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:02:42,517 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:02:42,679 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:02:43,023 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:02:43,024 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:05:26,289 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:07:28,691 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:07:28,826 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:07:29,196 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:07:29,196 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:07:56,923 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:08:34,026 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:08:34,178 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:08:34,564 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:08:34,565 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:09:15,730 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:11:33,838 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:11:33,974 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:11:34,321 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:11:34,321 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:14:51,569 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:14:51,718 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:14:52,052 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:14:52,052 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:15:04,126 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:16:07,153 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:16:07,302 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:16:07,731 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:16:07,731 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:18:45,961 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:18:46,144 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:18:46,501 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:18:46,501 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:22:13,637 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:22:13,785 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:22:14,140 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:22:14,140 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:24:25,751 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:24:25,908 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:24:26,249 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:24:26,249 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:27:06,079 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:27:06,234 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:27:06,583 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:27:06,584 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:29:11,427 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:30:15,188 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:30:15,340 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:30:15,682 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:30:15,683 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:31:46,563 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:32:44,774 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:32:44,927 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:32:45,354 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:32:45,354 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:35:12,713 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:35:50,226 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:35:50,383 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:35:50,717 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:35:50,717 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:39:33,333 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:43:36,942 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:43:37,097 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:43:37,527 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:43:37,528 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:44:33,714 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:54:08,602 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:54:08,763 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:54:09,188 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:54:09,189 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:56:04,015 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
+2024-10-07 13:56:22,021 - CHMLFRP_UI - INFO - 所需文件已存在，无需下载
+2024-10-07 13:56:22,174 - CHMLFRP_UI - INFO - 尝试登录用户: boring_student
+2024-10-07 13:56:22,513 - CHMLFRP_UI - INFO - 登录成功
+2024-10-07 13:56:22,513 - CHMLFRP_UI - INFO - 使用保存的用户名和密码自动登录成功
+2024-10-07 13:56:55,708 - CHMLFRP_UI - INFO - 已强制终止所有 frpc.exe 进程
