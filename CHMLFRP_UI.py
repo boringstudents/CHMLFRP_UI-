@@ -893,9 +893,6 @@ class PingThread(QThread):
             return int(match.group(1))
         return None
 
-    import socket
-    import time
-
     def tcp_ping(self):
         port = 80  # 默认使用 80 端口
         if ':' in self.target:
