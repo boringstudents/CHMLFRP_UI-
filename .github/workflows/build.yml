@@ -37,7 +37,7 @@ jobs:
 
     - name: Build with Nuitka
       run: |
-        python -m nuitka --windows-icon-from-ico=favicon.ico --onefile --enable-plugin=pyqt6 --include-qt-plugins=sensible,webenginecore --enable-plugin=PyQtWebEngine --follow-imports --output-dir=dist --output-filename=${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.exe main.py
+        python -m nuitka --windows-icon-from-ico=favicon.ico --onefile --enable-plugin=pyqt6 --include-qt-plugins=sensible,webenginecore --enable-plugin=pyqt6-webengine --follow-imports --output-dir=dist --output-filename=${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.exe main.py
 
     - name: Create distribution package
       run: |
