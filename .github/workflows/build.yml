@@ -1,27 +1,30 @@
-name: Build ChmlFrp UI
+name: Build GUI with Nuitka
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  release:
-    types: [created]
-
-env:
-  APP_NAME: ChmlFrp_UI
-  VERSION: 2.1.0
-  AUTHOR: boring_student
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number'
+        required: true
+        default: '2.1.0'
+      author:
+        description: 'Author name'
+        required: true
+        default: 'boring_student'
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v2
       with:
         python-version: '3.12'
 
@@ -33,35 +36,10 @@ jobs:
 
     - name: Build with Nuitka
       run: |
-        python -m nuitka --windows-icon-from-ico=favicon.ico --onefile --enable-plugin=pyqt6 --include-qt-plugins=all --follow-imports --output-dir=dist --output-filename=${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.exe main.py
-
-    - name: Create distribution package
-      run: |
-        mkdir dist_package
-        copy dist\${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.exe dist_package\
-        copy favicon.ico dist_package\
-        copy README.md dist_package\
-        copy LICENSE dist_package\
-        echo Author: ${{ env.AUTHOR }} > dist_package\AUTHOR.txt
-        echo Version: ${{ env.VERSION }} >> dist_package\AUTHOR.txt
-
-    - name: Create ZIP archive
-      run: |
-        Compress-Archive -Path dist_package\* -DestinationPath ${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.zip
+        python -m nuitka --standalone --onefile --windows-icon-from-ico=favicon.ico --windows-disable-console --company-name="${{ github.event.inputs.author }}" --product-version="${{ github.event.inputs.version }}" --product-name="CHMLFRP_UI" --file-version="${{ github.event.inputs.version }}" --output-dir=dist CHMLFRP_UI.py
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
-        name: ${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}
-        path: ${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.zip
-
-    - name: Upload release asset
-      if: github.event_name == 'release'
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.zip
-        asset_name: ${{ env.APP_NAME }}_${{ env.VERSION }}_by_${{ env.AUTHOR }}.zip
-        asset_content_type: application/zip
+        name: CHMLFRP_UI
+        path: dist/CHMLFRP_UI.exe
