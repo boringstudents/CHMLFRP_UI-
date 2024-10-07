@@ -25,13 +25,13 @@ jobs:
           python-version: '3.12.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
           cache: 'pip'
-          
+
       - run: pip install -r requirements.txt
-      
+
       - run: pip install pyinstaller
 
       # pack python script into exe
-      - run: pyinstaller -w -F CHMLFRP_UI.py -i favicon.ico --noupx --uac-admin --debug=all
+      - run: pyinstaller -w -F CHMLFRP_UI无web.py -i favicon.ico --noupx --uac-admin --debug=all
 
       # Uploads artifact
       - name: Upload Artifact
@@ -39,3 +39,4 @@ jobs:
         with:
           path: dist/
           compression-level: 0
+
